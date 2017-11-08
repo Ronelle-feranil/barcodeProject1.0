@@ -33,6 +33,9 @@ public class Transactions extends BaseUpdatedDate implements Serializable{
 	@Column(name="barcode_string", length = 24)
 	private String barcodeString;
 	
+	@Column(name="secondary_barcode_string")
+	private String secondaryBarcodeString;
+	
 	@Column(name="transaction_type")
 	private String transactionType;
 	
@@ -96,6 +99,14 @@ public class Transactions extends BaseUpdatedDate implements Serializable{
 
 	public void setBarcodeString(String barcodeString) {
 		this.barcodeString = barcodeString;
+	}
+
+	public String getSecondaryBarcodeString() {
+		return secondaryBarcodeString;
+	}
+
+	public void setSecondaryBarcodeString(String secondaryBarcodeString) {
+		this.secondaryBarcodeString = secondaryBarcodeString;
 	}
 
 	public String getTransactionType() {

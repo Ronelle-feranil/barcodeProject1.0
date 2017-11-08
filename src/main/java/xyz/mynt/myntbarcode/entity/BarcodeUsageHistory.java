@@ -20,6 +20,9 @@ public class BarcodeUsageHistory extends BaseCreatedDate implements Serializable
 	
 	@Column(name="barcode_string")
 	private String barcodeString;
+	
+	@Column(name="secondary_barcode_string")
+	private String secondaryBarcodeString;
 
 	@Column(name="account_identifier_id")
 	private long accountIdentifierID;
@@ -44,6 +47,14 @@ public class BarcodeUsageHistory extends BaseCreatedDate implements Serializable
 
 	public void setBarcodeString(String barcodeString) {
 		this.barcodeString = barcodeString;
+	}
+
+	public String getSecondaryBarcodeString() {
+		return secondaryBarcodeString;
+	}
+
+	public void setSecondaryBarcodeString(String secondaryBarcodeString) {
+		this.secondaryBarcodeString = secondaryBarcodeString;
 	}
 
 	public boolean isStatus() {
