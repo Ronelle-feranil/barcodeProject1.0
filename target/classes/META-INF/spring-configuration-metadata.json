@@ -1,0 +1,17 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "xyz.mynt.myntbarcode.config.IpAddressConfig",
+      "name": "spring.security.enabled",
+      "type": "xyz.mynt.myntbarcode.config.IpAddressConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "xyz.mynt.myntbarcode.config.IpAddressConfig",
+      "name": "spring.security.enabled.ip-addresses",
+      "type": "java.util.List<java.lang.String>"
+    }
+  ]
+}

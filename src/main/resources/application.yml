@@ -1,0 +1,72 @@
+#local
+server:
+  port: 8080 
+  
+spring:
+  profiles: local
+  
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect  
+      
+  datasource:
+    url: jdbc:mysql://localhost:3306/barcode
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    
+  security:    
+    enabled:
+      ipAddresses:
+        - 0:0:0:0:0:0:0:1  
+        - 0:0:0:0:0:0:0:2 
+
+#cron expressions     
+cron: 
+  schedule:
+    expire:
+      otp: 0 0/1 * * * ?
+      accountidentifier: 0 0/2 * * * ?
+      seveneleven: 0 0/5 * * * ?
+
+---    
+#dev
+server:
+  port: 8090
+
+spring:
+  profiles: dev
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      properties:
+        dialect: org.hibernate.dialect.MySQLDialect
+      
+  datasource:
+    url: jdbc:mysql://localhost:3306/barcode
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    
+  security:    
+    enabled:
+      ipAddresses:
+        - 0:0:0:0:0:0:0:1 
+        - 0:0:0:0:0:0:0:2
+    
+
+#cron expressions     
+cron: 
+  schedule:
+    expire:
+      otp: 0 0/1 * * * ?
+      accountidentifier: 0 0/2 * * * ?
+      seveneleven: 0 0/5 * * * ?
+#qa
+
+#uat         
