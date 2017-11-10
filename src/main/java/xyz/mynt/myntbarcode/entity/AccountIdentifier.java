@@ -4,9 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+
+import xyz.mynt.myntbarcode.enums.Status;
 
 /**
  * Entity for Account Identifier
@@ -37,8 +41,9 @@ public class AccountIdentifier extends BaseUpdatedDate implements Serializable{
 	@Column(name="hashed_pin")
 	private String hashedPin;
 	
-	@Column(name="status")
-	private boolean status;
+	@Column(name="status", columnDefinition = "tinyint") 
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
 	
 	@Column(name="secondary_barcode_string")
 	private String secondaryBarcodeString;
@@ -79,14 +84,6 @@ public class AccountIdentifier extends BaseUpdatedDate implements Serializable{
 		this.hashedPin = hashedPin;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	public String getExtraDetails() {
 		return extraDetails;
 	}
@@ -101,6 +98,14 @@ public class AccountIdentifier extends BaseUpdatedDate implements Serializable{
 
 	public void setSecondaryBarcodeString(String secondaryBarcodeString) {
 		this.secondaryBarcodeString = secondaryBarcodeString;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }

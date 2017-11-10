@@ -5,9 +5,13 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+
+import xyz.mynt.myntbarcode.enums.Status;
 
 @Entity
 @Table(name="Transactions")
@@ -55,8 +59,9 @@ public class Transactions extends BaseUpdatedDate implements Serializable{
 	@Column(name="merchant_transid")
 	private String merchantTransID;
 	
-	@Column(name="status")
-	private boolean status;
+	@Column(name="status", columnDefinition = "tinyint")  
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
 	
 	@Column(name="source_instance")
 	private String sourceInstance;
@@ -99,14 +104,6 @@ public class Transactions extends BaseUpdatedDate implements Serializable{
 
 	public void setBarcodeString(String barcodeString) {
 		this.barcodeString = barcodeString;
-	}
-
-	public String getSecondaryBarcodeString() {
-		return secondaryBarcodeString;
-	}
-
-	public void setSecondaryBarcodeString(String secondaryBarcodeString) {
-		this.secondaryBarcodeString = secondaryBarcodeString;
 	}
 
 	public String getTransactionType() {
@@ -157,14 +154,6 @@ public class Transactions extends BaseUpdatedDate implements Serializable{
 		this.merchantTransID = merchantTransID;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	public String getSourceInstance() {
 		return sourceInstance;
 	}
@@ -172,7 +161,22 @@ public class Transactions extends BaseUpdatedDate implements Serializable{
 	public void setSourceInstance(String sourceInstance) {
 		this.sourceInstance = sourceInstance;
 	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 	
+	public String getSecondaryBarcodeString() {
+		return secondaryBarcodeString;
+	}
+
+	public void setSecondaryBarcodeString(String secondaryBarcodeString) {
+		this.secondaryBarcodeString = secondaryBarcodeString;
+	}
 	
 	
 }

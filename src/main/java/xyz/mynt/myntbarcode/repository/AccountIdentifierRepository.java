@@ -8,13 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import xyz.mynt.myntbarcode.entity.AccountIdentifier;
+import xyz.mynt.myntbarcode.enums.Status;
 
 @Repository
 public interface AccountIdentifierRepository extends JpaRepository<AccountIdentifier, Long>{
 	
-	public long countByAccountIdentifierAndStatus(long accountIdentifier, boolean status);
+	public long countByAccountIdentifierAndStatus(long accountIdentifier, Status status);
 	
-	public AccountIdentifier findByGcashWalletAndStatus(String gcashWallet, boolean status);
+	public AccountIdentifier findByGcashWalletAndStatus(String gcashWallet, Status status);
 	
 	@Transactional
 	@Query(value = "UPDATE account_identifier SET status = 0, hashed_pin = '' WHERE datetime_modified < (NOW() - INTERVAL 5 MINUTE) AND secondary_barcode_string IS NULL"

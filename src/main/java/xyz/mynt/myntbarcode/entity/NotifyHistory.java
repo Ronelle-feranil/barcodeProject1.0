@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+
+import xyz.mynt.myntbarcode.enums.Status;
 
 @Entity
 @Table(name="NotifyHistory")
@@ -38,8 +42,9 @@ public class NotifyHistory extends BaseUpdatedDate implements Serializable{
 	@Type(type="text")
 	private String params;
 
-	@Column(name="status")
-	private boolean status;
+	@Column(name="status", columnDefinition = "tinyint")  
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
 
 	public long getTransactionID() {
 		return transactionID;
@@ -81,12 +86,4 @@ public class NotifyHistory extends BaseUpdatedDate implements Serializable{
 		this.params = params;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-	
 }

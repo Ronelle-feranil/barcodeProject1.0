@@ -14,6 +14,7 @@ import xyz.mynt.myntbarcode.entity.AccountIdentifier;
 import xyz.mynt.myntbarcode.entity.BarcodeUsageHistory;
 import xyz.mynt.myntbarcode.entity.OTP;
 import xyz.mynt.myntbarcode.entity.Transactions;
+import xyz.mynt.myntbarcode.enums.Status;
 import xyz.mynt.myntbarcode.exception.BarcodeException;
 import xyz.mynt.myntbarcode.repository.AccountIdentifierRepository;
 import xyz.mynt.myntbarcode.repository.BarcodeUsageHistoryRepository;
@@ -65,7 +66,7 @@ public class BarcodeService {
 		BarcodeUsageHistory barcodeUsageHistory = 
 				generateBarcodeUsage(accountIdentifier.getAccountIdentifier(), otp.getOtpString(), barcodeRequest.getGcashWalletName());
 		
-		Transactions transaction = persistTransaction(barcodeUsageHistory);
+		Transactions transaction = persistTransaction(barcodeUsageHistory, barcodeRequest);
 		
 		barcodeResponse.setMessage("message");
 		barcodeResponse.setNamespace("namespace");
@@ -88,7 +89,7 @@ public class BarcodeService {
 		
 		
 		AccountIdentifier accountIdentifier = accountIdentifierRepository
-				.findByGcashWalletAndStatus(barcodeRequest.getGcashWalletName(), true);
+				.findByGcashWalletAndStatus(barcodeRequest.getGcashWalletName(), Status.ACTIVE);
 		
 		if(accountIdentifier == null) {
 			
@@ -99,7 +100,7 @@ public class BarcodeService {
 			while(exist) {
 
 				ai = GeneratorUtils.generateRandomNumber(1000000000, 9999999999L, new Random());
-				count = accountIdentifierRepository.countByAccountIdentifierAndStatus(ai, true);
+				count = accountIdentifierRepository.countByAccountIdentifierAndStatus(ai, Status.ACTIVE);
 				
 				if(count==0) {
 					
@@ -110,11 +111,10 @@ public class BarcodeService {
 					accountIdentifier.setExtraDetails("extraDetails");
 					accountIdentifier.setGcashWallet(barcodeRequest.getGcashWalletName());
 					accountIdentifier.setHashedPin(barcodeRequest.getPin());
-					accountIdentifier.setStatus(true);
+					accountIdentifier.setStatus(Status.ACTIVE);
 					accountIdentifier = accountIdentifierRepository.save(accountIdentifier);
 					exist= false; 
 					break;
-					
 				}
 			}	
 		}
@@ -147,7 +147,7 @@ public class BarcodeService {
 				
 				otp.setAccountIdentifier(accountIdentifier);
 				otp.setOtpString(otpString);	
-				otp.setStatus(true);
+				otp.setStatus(Status.ACTIVE);
 				otp = otpRepository.save(otp);
 				exist = false;
 				break;
@@ -172,7 +172,7 @@ public class BarcodeService {
 		barcodeUsageHistory.setOtpString(otp);
 		barcodeUsageHistory.setBarcodeString(cgcp.concat(String.valueOf(accountIdentifier)).concat(String.valueOf(otp)));
 		barcodeUsageHistory.setSubscriberGcashWallet(gcashWallet);
-		barcodeUsageHistory.setStatus(true);
+		barcodeUsageHistory.setStatus(Status.ACTIVE);
 		barcodeUsageHistory = barcodeUsageHistoryRepository.save(barcodeUsageHistory);
 		
 		return barcodeUsageHistory;
@@ -191,10 +191,11 @@ public class BarcodeService {
 		return cgcp;
 	}
 	
-	private Transactions persistTransaction(BarcodeUsageHistory barcodeUsageHistory) {
+	private Transactions persistTransaction(BarcodeUsageHistory barcodeUsageHistory, BarcodeRequest barcodeRequest) {
 		
 		Transactions transaction =  new Transactions();
 		transaction.setBarcodeString(barcodeUsageHistory.getBarcodeString());
+		transaction.setSubscriberGcashWallet(barcodeRequest.getGcashWalletName());
 		transaction.setGcashTransID("testID 123456");
 		
 		transaction = transactionRepository.save(transaction);

@@ -4,9 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import xyz.mynt.myntbarcode.enums.Status;
 
 @Entity
 @Table(name="MerchantTransIDValidator")
@@ -24,8 +28,9 @@ public class MerchantTransIDValidator extends BaseCreatedDate implements Seriali
 	@JoinColumn(name="merchant_transid", referencedColumnName = "merchant_transid",nullable = true)
 	private Transactions transactions;
 	
-	@Column(name="status")
-	private boolean status;
+	@Column(name="status", columnDefinition = "tinyint")  
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
 
 	public int getMerchantID() {
 		return merchantID;
@@ -43,13 +48,12 @@ public class MerchantTransIDValidator extends BaseCreatedDate implements Seriali
 		this.transactions = transactions;
 	}
 
-	public boolean isStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
-	
-	
+
 }

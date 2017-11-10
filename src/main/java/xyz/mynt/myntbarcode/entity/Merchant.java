@@ -7,11 +7,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import xyz.mynt.myntbarcode.enums.Status;
 
 
 /**
@@ -61,8 +65,9 @@ public class Merchant extends BaseUpdatedDate implements Serializable{
 	@Column(name="mobile_number_hq")
 	private String mobileNumberHq;
 	
-	@Column(name="status")
-	private boolean status;
+	@Column(name="status", columnDefinition = "tinyint")  
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
 	
 	@OneToMany(fetch= FetchType.LAZY, cascade = CascadeType.PERSIST,mappedBy="merchant")
 	private List<MerchantKeys> merchantKeys;
@@ -147,20 +152,20 @@ public class Merchant extends BaseUpdatedDate implements Serializable{
 		this.mobileNumberHq = mobileNumberHq;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	public List<MerchantKeys> getMerchantKeys() {
 		return merchantKeys;
 	}
 
 	public void setMerchantKeys(List<MerchantKeys> merchantKeys) {
 		this.merchantKeys = merchantKeys;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 	
 }

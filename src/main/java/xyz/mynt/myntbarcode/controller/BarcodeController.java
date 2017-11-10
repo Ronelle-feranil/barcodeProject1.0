@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.mynt.myntbarcode.domain.BarcodeRequest;
 import xyz.mynt.myntbarcode.domain.BarcodeResponse;
 import xyz.mynt.myntbarcode.domain.PaymentReferenceCreationRequest;
+import xyz.mynt.myntbarcode.domain.ValidateConfirmRequest;
 import xyz.mynt.myntbarcode.entity.BarcodeUsageHistory;
 import xyz.mynt.myntbarcode.exception.BarcodeException;
 import xyz.mynt.myntbarcode.service.BarcodeService;
+import xyz.mynt.myntbarcode.service.CashinService;
 import xyz.mynt.myntbarcode.service.PaymentReferenceCreationService;
 
 /**
@@ -38,6 +40,9 @@ public class BarcodeController {
 	
 	@Autowired
 	private PaymentReferenceCreationService paymentReferenceCreationService;
+	
+	@Autowired
+	private CashinService cashinService;
 	
 	/**
 	 * Contoller for Barcode Generation
@@ -64,6 +69,19 @@ public class BarcodeController {
 		} 
 		
 		return paymentReferenceCreationService.mapSecondaryBarcode(paymentReferenceCreationRequest);
+	}
+	
+	/**
+	 * 
+	 * Controller for Validate 
+	 * @param barcodeRequest
+	 * @return ResponseEntity<?>
+	 * @throws BarcodeException
+	 */
+	@RequestMapping(value="validate", method=RequestMethod.POST)
+	public ResponseEntity<BarcodeResponse<?>> validate(@RequestBody ValidateConfirmRequest validateConfirmRequest) throws BarcodeException {
+		
+		return cashinService.validate(validateConfirmRequest);
 	}
 	
 }

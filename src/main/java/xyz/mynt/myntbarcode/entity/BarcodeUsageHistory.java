@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
+
+import xyz.mynt.myntbarcode.enums.Status;
 
 @Entity
 @Table(name="BarcodeUsageHistory")
@@ -20,9 +24,6 @@ public class BarcodeUsageHistory extends BaseCreatedDate implements Serializable
 	
 	@Column(name="barcode_string")
 	private String barcodeString;
-	
-	@Column(name="secondary_barcode_string")
-	private String secondaryBarcodeString;
 
 	@Column(name="account_identifier_id")
 	private long accountIdentifierID;
@@ -30,8 +31,12 @@ public class BarcodeUsageHistory extends BaseCreatedDate implements Serializable
 	@Column(name="otp_string")
 	private long otpString;
 	
-	@Column(name="status")
-	private boolean status;
+	@Column(name="status", columnDefinition = "tinyint")  
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
+	
+	@Column(name="secondary_barcode_string")
+	private String secondaryBarcodeString;
 
 	public String getSubscriberGcashWallet() {
 		return subscriberGcashWallet;
@@ -49,22 +54,6 @@ public class BarcodeUsageHistory extends BaseCreatedDate implements Serializable
 		this.barcodeString = barcodeString;
 	}
 
-	public String getSecondaryBarcodeString() {
-		return secondaryBarcodeString;
-	}
-
-	public void setSecondaryBarcodeString(String secondaryBarcodeString) {
-		this.secondaryBarcodeString = secondaryBarcodeString;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	public long getAccountIdentifierID() {
 		return accountIdentifierID;
 	}
@@ -79,6 +68,22 @@ public class BarcodeUsageHistory extends BaseCreatedDate implements Serializable
 
 	public void setOtpString(long otpString) {
 		this.otpString = otpString;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public String getSecondaryBarcodeString() {
+		return secondaryBarcodeString;
+	}
+
+	public void setSecondaryBarcodeString(String secondaryBarcodeString) {
+		this.secondaryBarcodeString = secondaryBarcodeString;
 	}
 
 	

@@ -7,12 +7,16 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Type;
+
+import xyz.mynt.myntbarcode.enums.Status;
 
 @Entity
 @Table(name="AccountIdentifierHistory")
@@ -40,8 +44,9 @@ public class AccountIdentifierHistory implements Serializable{
 	@Column(name="hashed_pin")
 	private String hashedPin;
 	
-	@Column(name="status")
-	private boolean status;
+	@Column(name="status", columnDefinition = "tinyint") 
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
 	
 	@Column(name="extra_details")
 	@Type(type="text")
@@ -86,14 +91,6 @@ public class AccountIdentifierHistory implements Serializable{
 
 	public void setHashedPin(String hashedPin) {
 		this.hashedPin = hashedPin;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
 	}
 
 	public String getExtraDetails() {

@@ -4,10 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import xyz.mynt.myntbarcode.enums.Status;
 
 @Entity
 @Table(name="Otp")
@@ -26,8 +30,9 @@ public class OTP extends BaseUpdatedDate implements Serializable{
 	@Column(name="otp_string")
 	private int otpString;
 	
-	@Column(name="status")
-	private boolean status;
+	@Column(name="status", columnDefinition = "tinyint") 
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
 	
 	public int getOtpString() {
 		return otpString;
@@ -37,20 +42,20 @@ public class OTP extends BaseUpdatedDate implements Serializable{
 		this.otpString = otpString;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	public AccountIdentifier getAccountIdentifier() {
 		return accountIdentifier;
 	}
 
 	public void setAccountIdentifier(AccountIdentifier accountIdentifier) {
 		this.accountIdentifier = accountIdentifier;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 	
 	

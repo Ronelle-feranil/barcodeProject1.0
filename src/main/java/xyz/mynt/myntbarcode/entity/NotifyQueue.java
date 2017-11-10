@@ -31,4 +31,28 @@ public class NotifyQueue extends BaseUpdatedDate implements Serializable{
 	@Type(type="text")
 	private String description;
 
+	public Transactions getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(Transactions transactions) {
+		this.transactions = transactions;
+	}
+
+	public String getNotifyURL() {
+		return notifyURL;
+	}
+
+	public void setNotifyURL(String notifyURL) {
+		this.notifyURL = notifyURL;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }

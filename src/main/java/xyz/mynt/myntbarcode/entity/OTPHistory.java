@@ -7,10 +7,14 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import xyz.mynt.myntbarcode.enums.Status;
 
 @Entity
 @Table(name="OTPHistory")
@@ -32,8 +36,9 @@ public class OTPHistory implements Serializable{
 	@Column(name="otp_string")
 	private int otpString;
 	
-	@Column(name="status")
-	private boolean status;
+	@Column(name="status", columnDefinition = "tinyint")  
+	@Enumerated(EnumType.ORDINAL)
+	private Status status;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="datetime_created")
@@ -59,14 +64,6 @@ public class OTPHistory implements Serializable{
 		this.otpString = otpString;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	public Date getDateTimeCreated() {
 		return dateTimeCreated;
 	}
@@ -89,6 +86,14 @@ public class OTPHistory implements Serializable{
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }
