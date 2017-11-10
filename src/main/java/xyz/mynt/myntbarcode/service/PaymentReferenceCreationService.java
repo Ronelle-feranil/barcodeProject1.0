@@ -47,8 +47,8 @@ public class PaymentReferenceCreationService {
 		
 		
 		try {
-			trans = transactionRepository.transactionBarcodeExist(paymentReferenceCreationRequest.getBarcodeString());
-			barcodeHistory = barcodeUsageHistoryRepository.barcodeUsageHistoryExist(paymentReferenceCreationRequest.getBarcodeString());
+			trans = transactionRepository.findByBarcodeString(paymentReferenceCreationRequest.getBarcodeString());
+			barcodeHistory = barcodeUsageHistoryRepository.findByBarcodeString(paymentReferenceCreationRequest.getBarcodeString());
 			
 			if(trans != null  && barcodeHistory != null) {
 				

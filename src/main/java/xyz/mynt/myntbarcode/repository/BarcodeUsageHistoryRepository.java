@@ -18,8 +18,5 @@ public interface BarcodeUsageHistoryRepository extends JpaRepository<BarcodeUsag
 			, nativeQuery = true)
 	public int isSevenElevenBarcodeActive(@Param("barcodeString")String barcodeString);
 	
-	@Query(value = "SELECT * FROM barcode_usage_history buh WHERE buh.barcode_string = :barcodeString",
-			nativeQuery = true)
-	public BarcodeUsageHistory barcodeUsageHistoryExist(@Param("barcodeString")String barcodeString);
-	
+	public BarcodeUsageHistory findByBarcodeString(String barcodeString);
 }
