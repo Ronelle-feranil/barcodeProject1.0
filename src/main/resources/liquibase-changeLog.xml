@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-1">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-1">
         <createTable tableName="account_identifier">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -15,10 +15,10 @@
             <column name="gcash_wallet" type="VARCHAR(11)"/>
             <column name="hashed_pin" type="VARCHAR(255)"/>
             <column name="secondary_barcode_string" type="VARCHAR(255)"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-2">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-2">
         <createTable tableName="account_identifier_history">
             <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -32,10 +32,10 @@
             <column name="extra_details" type="LONGTEXT"/>
             <column name="gcash_wallet" type="VARCHAR(11)"/>
             <column name="hashed_pin" type="VARCHAR(255)"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-3">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-3">
         <createTable tableName="apilogs">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -48,7 +48,7 @@
             <column name="source_ip" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-4">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-4">
         <createTable tableName="audit_trail">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -59,7 +59,7 @@
             <column name="module" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-5">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-5">
         <createTable tableName="barcode_usage_history">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -69,11 +69,11 @@
             <column name="barcode_string" type="VARCHAR(255)"/>
             <column name="otp_string" type="BIGINT"/>
             <column name="secondary_barcode_string" type="VARCHAR(255)"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
             <column name="subscriber_gcash_wallet" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-6">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-6">
         <createTable tableName="merchant">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -90,10 +90,10 @@
             <column name="mobile_number_hq" type="VARCHAR(255)"/>
             <column name="prefix" type="VARCHAR(255)"/>
             <column name="registration_date" type="date"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-7">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-7">
         <createTable tableName="merchant_keys">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -102,25 +102,25 @@
             <column name="datetime_modified" type="datetime(6)"/>
             <column name="ip_address" type="VARCHAR(255)"/>
             <column name="merchant_key" type="VARCHAR(255)"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
             <column name="token" type="VARCHAR(255)"/>
             <column name="merchant_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-8">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-8">
         <createTable tableName="merchant_transidvalidator">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
             <column name="datetime_created" type="datetime(6)"/>
             <column name="merchant_id" type="INT"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
             <column name="merchant_transid" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-9">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-9">
         <createTable tableName="nonce">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -131,7 +131,7 @@
             <column name="timestamp" type="datetime(6)"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-10">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-10">
         <createTable tableName="notify_history">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -141,12 +141,12 @@
             <column name="description" type="LONGTEXT"/>
             <column name="notifty_url" type="VARCHAR(255)"/>
             <column name="params" type="LONGTEXT"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
             <column name="trasaction_id" type="BIGINT"/>
             <column name="notify_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-11">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-11">
         <createTable tableName="notify_queue">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -160,7 +160,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-12">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-12">
         <createTable tableName="otp">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -168,13 +168,13 @@
             <column name="datetime_created" type="datetime(6)"/>
             <column name="datetime_modified" type="datetime(6)"/>
             <column name="otp_string" type="INT"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
             <column name="account_identifier_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-13">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-13">
         <createTable tableName="otphistory">
             <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -183,10 +183,10 @@
             <column name="datetime_created" type="datetime(6)"/>
             <column name="datetime_modified" type="datetime(6)"/>
             <column name="otp_string" type="INT"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-14">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-14">
         <createTable tableName="transactions">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
@@ -204,61 +204,61 @@
             <column name="notify_url" type="VARCHAR(255)"/>
             <column name="secondary_barcode_string" type="VARCHAR(255)"/>
             <column name="source_instance" type="VARCHAR(255)"/>
-            <column name="status" type="BIT(1)"/>
+            <column name="status" type="TINYINT"/>
             <column name="subscriber_gcash_wallet" type="VARCHAR(11)"/>
             <column name="transaction_type" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-15">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-15">
         <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="account_identifier_history"/>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-16">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-16">
         <addPrimaryKey columnNames="id" constraintName="PRIMARY" tableName="otphistory"/>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-17">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-17">
         <addUniqueConstraint columnNames="account_identifier" constraintName="UK_ebn82gtf5wc0k6o1j8y0qgsqe" tableName="account_identifier"/>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-18">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-18">
         <addUniqueConstraint columnNames="merchant_transid" constraintName="UK_rmmjr77ew2ynedny3ap6fkcdj" tableName="transactions"/>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-19">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-19">
         <createIndex indexName="FK7e8mbcang941jo2ybtq4cp5jv" tableName="notify_history">
             <column name="notify_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-20">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-20">
         <createIndex indexName="FK97y7mac19jgjvos9uh8y4nv3c" tableName="otp">
             <column name="account_identifier_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-21">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-21">
         <createIndex indexName="FKd5b80ld3rm8dd63fwetbxmf93" tableName="merchant_transidvalidator">
             <column name="merchant_transid"/>
         </createIndex>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-22">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-22">
         <createIndex indexName="FKkc21app4bwdqxt9ouyq7da5o1" tableName="notify_queue">
             <column name="transaction_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-23">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-23">
         <createIndex indexName="FKoe2nljgj26gtmrwque3n7qs1" tableName="merchant_keys">
             <column name="merchant_id"/>
         </createIndex>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-24">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-24">
         <addForeignKeyConstraint baseColumnNames="notify_id" baseTableName="notify_history" constraintName="FK7e8mbcang941jo2ybtq4cp5jv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="notify_queue"/>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-25">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-25">
         <addForeignKeyConstraint baseColumnNames="account_identifier_id" baseTableName="otp" constraintName="FK97y7mac19jgjvos9uh8y4nv3c" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="account_identifier" referencedTableName="account_identifier"/>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-26">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-26">
         <addForeignKeyConstraint baseColumnNames="merchant_transid" baseTableName="merchant_transidvalidator" constraintName="FKd5b80ld3rm8dd63fwetbxmf93" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="merchant_transid" referencedTableName="transactions"/>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-27">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-27">
         <addForeignKeyConstraint baseColumnNames="transaction_id" baseTableName="notify_queue" constraintName="FKkc21app4bwdqxt9ouyq7da5o1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="transactions"/>
     </changeSet>
-    <changeSet author="ronelle.feranil (generated)" id="1510130367286-28">
+    <changeSet author="ronelle.feranil (generated)" id="1510286840446-28">
         <addForeignKeyConstraint baseColumnNames="merchant_id" baseTableName="merchant_keys" constraintName="FKoe2nljgj26gtmrwque3n7qs1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="merchant"/>
     </changeSet>
 </databaseChangeLog>
