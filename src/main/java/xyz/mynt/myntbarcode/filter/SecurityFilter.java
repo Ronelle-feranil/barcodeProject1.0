@@ -33,7 +33,7 @@ public class SecurityFilter implements Filter {
 
 	private static final Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
 	
-	private static final boolean CONDITION = true;
+//	private static final boolean CONDITION = true;
 	
 	@Autowired
 	private IpAddressConfig ipAddressConfig;
@@ -47,7 +47,7 @@ public class SecurityFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		
-		if (CONDITION) {
+		if (ipAddressConfig.isActivated()) {
 			
 			List<String> ipConfigList = ipAddressConfig.getIpAddresses();
 			
@@ -64,8 +64,9 @@ public class SecurityFilter implements Filter {
 			 }
 			
 		} else {
-			((HttpServletResponse) response)
-				.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//			((HttpServletResponse) response)
+//				.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+			chain.doFilter(request, response);
 		}
 	}
 	

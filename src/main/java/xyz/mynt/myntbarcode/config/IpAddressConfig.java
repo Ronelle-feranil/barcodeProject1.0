@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 public class IpAddressConfig {
 	
 	private List<String> ipAddresses;
+	
+	private boolean activated;
 
 	public List<String> getIpAddresses() {
 		return ipAddresses;
@@ -17,6 +19,14 @@ public class IpAddressConfig {
 
 	public void setIpAddresses(List<String> ipAddresses) {
 		this.ipAddresses = ipAddresses;
+	}
+
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
 	}
 
 

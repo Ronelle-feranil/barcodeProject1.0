@@ -29,7 +29,7 @@ public class BarcodeUsageHistory extends BaseCreatedDate implements Serializable
 	private long accountIdentifierID;
 	
 	@Column(name="otp_string")
-	private long otpString;
+	private int otpString;
 	
 	@Column(name="status", columnDefinition = "tinyint")  
 	@Enumerated(EnumType.ORDINAL)
@@ -66,7 +66,7 @@ public class BarcodeUsageHistory extends BaseCreatedDate implements Serializable
 		return otpString;
 	}
 
-	public void setOtpString(long otpString) {
+	public void setOtpString(int otpString) {
 		this.otpString = otpString;
 	}
 

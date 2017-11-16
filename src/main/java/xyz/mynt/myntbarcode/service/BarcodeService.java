@@ -146,8 +146,8 @@ public class BarcodeService {
 		while(exist) {
 			
 			otpString = (int) GeneratorUtils.generateRandomNumber(100000, 999999L, new Random());
-			count = barcodeUsageHistoryRepository.countActiveBarcodeUsage(accountIdentifier.getAccountIdentifier(), otpString);
-			
+			count = barcodeUsageHistoryRepository.countByAccountIdentifierIDAndOtpString(accountIdentifier.getAccountIdentifier(), otpString);
+
 			if(count == 0) {
 				
 				otpRepository.invalidatePreviousOTP(accountIdentifier.getAccountIdentifier());

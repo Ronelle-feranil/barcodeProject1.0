@@ -1,5 +1,7 @@
 package xyz.mynt.myntbarcode.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import xyz.mynt.myntbarcode.repository.OtpRepository;
 @Service
 public class SchedulerService {
 	
+	private static final Logger log = LoggerFactory.getLogger(SchedulerService.class);
+	
 	@Autowired
 	private OtpRepository otpRepository;
 	
@@ -28,8 +32,13 @@ public class SchedulerService {
 	@Scheduled(cron="${cron.schedule.expire.otp}")
 	public void expireOTP() {
 		
-		otpRepository.expireOTP();
-		System.out.println("CRON SERVICE OTP SUCCESS");
+		try {
+			
+			otpRepository.expireOTP();
+		}catch(RuntimeException e) {
+			
+			log.error("Unexepected error occured on expire OTP: ", e.getCause());
+		}
 	}
 	
 	/**
@@ -38,8 +47,13 @@ public class SchedulerService {
 	@Scheduled(cron="${cron.schedule.expire.accountidentifier}")
 	public void expireAccountIdentifier() {
 		
-		accountIdentifierRepository.expireAccountIdentifier();
-		System.out.println("CRON SERVICE Account Identifier SUCCESS");
+		try {
+			
+			accountIdentifierRepository.expireAccountIdentifier();
+		}catch(RuntimeException e) {
+			
+			log.error("Unexepected error occured on expire Account Identifier: ",e.getCause());
+		}
 	}
 	
 	
@@ -49,8 +63,13 @@ public class SchedulerService {
 	@Scheduled(cron="${cron.schedule.expire.seveneleven}")
 	public void expireSevenElevenAccountIdentifier() {
 		
-		accountIdentifierRepository.expireSevenElevenAccountIdentifier();
-		System.out.println("CRON SERVICE Seven Eleven Account Identifier SUCCESS");
+		try {
+			
+			accountIdentifierRepository.expireSevenElevenAccountIdentifier();
+		}catch(RuntimeException e) {
+			
+			log.error("Unexepected error occured on expire Seven Eleven Account Identifier: ",e.getCause());
+		}
 	}
 	
 

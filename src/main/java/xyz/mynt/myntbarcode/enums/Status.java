@@ -2,7 +2,7 @@ package xyz.mynt.myntbarcode.enums;
 
 public enum Status {
 	
-	INACTIVE(0), ACTIVE(1), UNPAID(2), PAID(3);
+	INACTIVE(0), ACTIVE(1), PAID(2);
 	
 	  private int value;
 
