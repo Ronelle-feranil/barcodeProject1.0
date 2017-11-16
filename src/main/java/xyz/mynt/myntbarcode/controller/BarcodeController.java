@@ -1,4 +1,4 @@
-	package xyz.mynt.myntbarcode.controller;
+package xyz.mynt.myntbarcode.controller;
 
 import java.util.Set;
 
@@ -44,6 +44,8 @@ public class BarcodeController {
 	@Autowired
 	private CashinService cashinService;
 	
+	
+	
 	/**
 	 * Contoller for Barcode Generation
 	 * 
@@ -58,7 +60,7 @@ public class BarcodeController {
 	}
 	
 	@RequestMapping(value="/payment-reference-creation", method=RequestMethod.POST)
-	public String paymentReferenceCreation(@RequestBody PaymentReferenceCreationRequest paymentReferenceCreationRequest){
+	public ResponseEntity<BarcodeResponse<?>> paymentReferenceCreation(@RequestBody PaymentReferenceCreationRequest paymentReferenceCreationRequest){
 		
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		Validator validator = factory.getValidator();
@@ -82,6 +84,21 @@ public class BarcodeController {
 	public ResponseEntity<BarcodeResponse<?>> validate(@RequestBody ValidateConfirmRequest validateConfirmRequest) throws BarcodeException {
 		
 		return cashinService.validate(validateConfirmRequest);
+	}
+	
+	@RequestMapping(value="/confirm", method=RequestMethod.POST)
+	public ResponseEntity<BarcodeResponse<?>> confirm(@RequestBody ValidateConfirmRequest validateConfirmRequest){
+		
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		Validator validator = factory.getValidator();
+		Set<ConstraintViolation<ValidateConfirmRequest>> violations = validator.validate(validateConfirmRequest);
+				
+		if (!(violations.toString().length() < 3)) {
+			throw new BarcodeException("Exception occured. Please see logs for details.");
+		} 
+		
+		
+		return cashinService.confirm(validateConfirmRequest);
 	}
 	
 }

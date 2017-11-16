@@ -68,6 +68,13 @@ public class BarcodeService {
 		
 		Transactions transaction = persistTransaction(barcodeUsageHistory, barcodeRequest);
 		
+		
+//		TODO: call esb for payment crea
+		
+		
+		
+		
+		
 		barcodeResponse.setMessage("message");
 		barcodeResponse.setNamespace("namespace");
 		barcodeResponse.setResultCode("200");
